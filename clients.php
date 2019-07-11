@@ -4,11 +4,11 @@ session_start();
 $title = "Haitham Harbi";
 $active = "Clients";
 require_once 'partials/init.php';
-    if (false) //(isset($_GET['action']) && $_GET['action'] === 'client') 
+    if (isset($_GET['id']))
     {
-        $license_no = filter_var(intval($_GET['id']), FILTER_SANITIZE_NUMBER_INT);
-        $query = $con->prepare("SELECT * FROM clients WHERE license_no=?");
-        $query->execute(array($license_no));
+        $id = filter_var(intval($_GET['id']), FILTER_SANITIZE_NUMBER_INT);
+        $query = $con->prepare("SELECT * FROM clients WHERE id=?");
+        $query->execute(array($id));
         
         if ($query->rowCount() > 0) 
         {
@@ -55,16 +55,14 @@ require_once 'partials/init.php';
     {
         
         {
-            $query = $con->prepare("SELECT * FROM client");
+            $query = $con->prepare("SELECT * FROM clients");
         }
         $query->execute(array());
         if ($query->rowCount() > 0) { ?>
 
 
-            <center>
-                <h2>All clients</h2>
-            </center> 
-        
+                <h2 class="text-center">All clients</h2>
+
             <div class="container ">
                 <div class="row py-2">
                     <?php
@@ -82,8 +80,8 @@ require_once 'partials/init.php';
                                       <div class="row no-gutters justify-content-between">
                                          
 
-                                          <a href="http://localhost/harbi/search.php?action=client&id=<?php 
-                                          echo $client['license_no']; ?> ">
+                                          <a href="clients.php?id=<?php
+                                          echo $client['id']; ?> ">
 
                                               <?php echo $client['name']; ?>
                                           </a>
