@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             $KM_counter=filter_var($_POST['KM_counter'],FILTER_SANITIZE_STRING);
 
 
-            $query = $con->prepare("INSERT INTO `client`(`name`, `phone_no`, `license_no`, `brand`, `year`, `chassis_no`, `license_name`, `KM_counter`) VALUES (?,?,?,?,?,?,?,?)");
+            $query = $con->prepare("INSERT INTO `clients`(`name`, `phone_no`, `license_no`, `brand`, `year`, `chassis_no`, `license_name`, `KM_counter`) VALUES (?,?,?,?,?,?,?,?)");
 
             $query->execute(array($name, $phone, $license_no, $brand, $year, $chassis_no ,
                 $license_name, $KM_counter));

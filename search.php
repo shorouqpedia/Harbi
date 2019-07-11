@@ -7,7 +7,7 @@ require_once 'partials/init.php';
 
         $license_no = filter_var(intval($_GET['id']), FILTER_SANITIZE_NUMBER_INT);
         echo $license_no;
-        $query = $con->prepare("SELECT * FROM client WHERE license_no=?");
+        $query = $con->prepare("SELECT * FROM clients WHERE license_no=?");
         $query->execute(array($license_no));
         
         if ($query->rowCount() > 0) 
