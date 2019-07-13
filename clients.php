@@ -17,10 +17,17 @@ require_once 'partials/init.php';
             <div class="container pb-5">
                 <div class="row">
                     <div class="card col-12">
-                        <div class="row justify-content-center align-items-center no-gutters">
-                            <img src="<?php echo $client['image'];?>" class="border-dark border rounded-circle my-3 card-img-top" style="max-width:18rem;" alt="client Image">
-                        </div>
                         <ul class="list-group list-group-flush">
+                          <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-4 font-weight-bold">
+                                          ID
+                                        </div>
+                                        <div class="col-8">
+                                            <?php echo $id;?>
+                                        </div>
+                                    </div>
+                                </li>
                             <?php foreach ($client as $key=>$value) {
                                 if (in_array(strtolower($key),['id', 'image'])) {
                                     continue;
@@ -40,6 +47,7 @@ require_once 'partials/init.php';
                         </ul>
                     </div>
                 </div>
+                <a class="form-control btn btn-success" style="margin-top:10px;" href="edit.php?id=<?php echo $id; ?>">Edit</a>
             </div>
 
         <?php 
@@ -52,17 +60,28 @@ require_once 'partials/init.php';
     }
 
     else
-    {
-        
+    {?>
+      <div class="container d-flex align-items-end flex-column " >
+        <form class="form-inline" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+          <input type=text name="q" placeholder="Search">
+        </form>
+      </div>
+      <?php
+      
+        if($_SERVER['REQUEST_METHOD']=='POST')
+        {
+          $q=$_POST['q'];
+          $query = $con->prepare("SELECT * FROM clients WHERE id=$q");
+        }
+
+        else  
         {
             $query = $con->prepare("SELECT * FROM clients");
+            ?><h2 class="text-center">All clients</h2><?php
+
         }
         $query->execute(array());
         if ($query->rowCount() > 0) { ?>
-
-
-                <h2 class="text-center">All clients</h2>
-
             <div class="container ">
                 <div class="row py-2">
                     <?php
@@ -78,21 +97,17 @@ require_once 'partials/init.php';
                               <?php foreach ($clients as $client) { ?>
                                 <li class="lead font-weight-bold list-group-item">
                                       <div class="row no-gutters justify-content-between">
-                                         
-
-                                          <a href="clients.php?id=<?php
-                                          echo $client['id']; ?> ">
-
+                                                                              
+                                         <div> <?php echo $client['id']; ?> <a href="clients.php?id=<?php
+                                          echo $client['id']; ?> " style=' padding-left: 25px;'>
                                               <?php echo $client['name']; ?>
-                                          </a>
+                                          </a></div>
 
                                           <div>
                                               <?php echo $client['brand']; ?>
                                           </div>
                                          
-                                          <div>
-                                              <?php echo $client['year']; ?>
-                                          </div>
+
                                       </div>
                                 </li>
                               <?php } ?>

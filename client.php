@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         
         $license_no = filter_var($_POST['license_no'], FILTER_SANITIZE_STRING);
     
-        if (!checkDB('client', 'license_no', $license_no)) 
+        if (!checkDB('clients', 'license_no', $license_no)) 
         {   
 
             $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
