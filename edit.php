@@ -11,12 +11,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
             $phone = filter_var(intval($_POST['phone']), FILTER_SANITIZE_NUMBER_INT);
             $KM_counter=filter_var($_POST['KM_counter'],FILTER_SANITIZE_STRING);
-echo $name;
-            $sql = " UPDATE clients SET
-             name=$name , phone_no=$phone , KM_counter=$KM_counter 
-             WHERE id=$id ";
-
-            if ($con->query($sql)===TRUE) 
+            $sql = "UPDATE clients SET
+             `name`='$name', `phone_no`='0$phone', `KM_counter`='$KM_counter'
+             WHERE `id`=$id ";
+            $query = $con->query($sql);
+            if ($query)
             {
                 ?> <h3>Successfull</h3><?php                
                 header('Location:clients.php');
@@ -44,8 +43,7 @@ if (isset($_GET['id']))
               id="registerForm" name="registerForm" enctype="multipart/form-data">
 
             <div class="form-group">
-                <label hidden="true" for="id" class="control-label">id</label>
-                <input hidden="true" required data-check="[^A-Za-z ]" id="id" name="id" type="number" class="form-control" placeholder="client id" value="<?php echo $client['id'];
+                <input required data-check="[^A-Za-z ]" id="id" name="id" type="hidden" class="form-control" placeholder="client id" value="<?php echo $client['id'];
 ?>">
             </div>
 
@@ -95,7 +93,7 @@ if (isset($_GET['id']))
             </div>
 
             <div class="form-group mb-5">
-                <input type="submit" class="form-control btn btn-success" value="Sign Up">
+                <input type="submit" class="btn btn-success" value="Edit">
             </div>
 
         </form>
