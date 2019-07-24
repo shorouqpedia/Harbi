@@ -2,7 +2,7 @@
 ob_start();
 session_start();
 $title = "Haitham Harbi";
-$active = "Clients";
+$active = "clients";
 require_once 'partials/init.php';
     if (isset($_GET['id']))
     {
@@ -46,8 +46,13 @@ require_once 'partials/init.php';
                             <?php }?>
                         </ul>
                     </div>
-                <a class="btn btn-success px-5 d-inline-block my-3 mx-auto" href="edit.php?id=<?php echo $id; ?>">Edit</a>
                 </div>
+                <a class="form-control btn btn-success" style="margin-top:10px;" href="edit.php?id=<?php echo $id; ?>">تعديـل البيـانـات</a>
+                
+                <form action="maintain.php" method="GET">
+                <input type="text" hidden="TRUE" name="cid" value="<?php echo $id; ?>">
+
+                <button type="submit" class="form-control btn btn-success" style="margin-top:10px;height: 38px;">سجـل الصيــانات</button>
             </div>
 
         <?php 
