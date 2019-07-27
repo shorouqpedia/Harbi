@@ -16,9 +16,9 @@ require_once 'partials/init.php';
         $KM_counter=$client['KM_counter'];
     }
     $name = $KM_counter;
-    $check=mysqli_query($con,"SELECT * from maintenance_history WHERE name='$name'");
-    $checkrows=mysqli_num_rows($check);
-    if($checkrows>0) 
+    //$check=mysqli_query($con,"SELECT * from maintenance_history WHERE name='$name'");
+    //$checkrows=mysqli_num_rows($check);
+    if(TRUE)//($checkrows>0) 
     { 
         $query = $con->prepare("INSERT INTO `maintenance_history` (`cid`,`name`) VALUES ($id,$name)");
         $query->execute(array($id,$name));
