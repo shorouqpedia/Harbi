@@ -68,17 +68,26 @@ require_once 'partials/init.php';
     {?>
       <div class="container d-flex align-items-end flex-column " >
         <form class="form-inline" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-          <input type=text name="q" placeholder="Search">
+          <input type=text name="qid" placeholder="Search by customer ID">
         </form>
       </div>
-      <?php
-      
-        if($_SERVER['REQUEST_METHOD']=='POST')
+      <!-- <div class="container d-flex align-items-end flex-column " >
+        <form class="form-inline" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+          <input type=text name="qlicense" placeholder="Search by license no">
+        </form>
+      </div>  -->
+      <?php 
+    
+        if($_SERVER['REQUEST_METHOD']=='POST'&& isset($_POST['qid']))
         {
-          $q=$_POST['q'];
+          $q=$_POST['qid'];
           $query = $con->prepare("SELECT * FROM clients WHERE id=$q");
         }
-
+        else if ($_SERVER['REQUEST_METHOD']=='POST'&& isset($_POST['qlicense']))
+        {
+          $q=$_POST['qlicense'];
+          $query = $con->prepare("SELECT * FROM clients WHERE license_no=$q");
+        }
         else  
         {
             $query = $con->prepare("SELECT * FROM clients");

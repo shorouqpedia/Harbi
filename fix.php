@@ -15,7 +15,7 @@ require_once 'partials/init.php';
         $client = $q->fetchAll(PDO::FETCH_ASSOC)[0];
         $KM_counter=$client['KM_counter'];
     }
-    $name = $KM_counter;
+    $name =$KM_counter;
     //$check=mysqli_query($con,"SELECT * from maintenance_history WHERE name='$name'");
     //$checkrows=mysqli_num_rows($check);
     if(TRUE)//($checkrows>0) 

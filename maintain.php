@@ -99,7 +99,7 @@ require_once 'partials/init.php';
                                         <div class="row no-gutters justify-content-between">
                                         <div>
                                             <a href='maintain.php?id=<?php echo $m_id ?>' style=' padding-left: 15px;'>
-                                                <?php echo $maintaining['name']; ?>
+                                                <?php echo $maintaining['name']." KM" . " صيانة الـ "; ?>
                                             </a>
                                         </div>
                                         <div>

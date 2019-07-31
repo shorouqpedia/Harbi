@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             if ($query->rowCount() > 0) 
             {
                 ?> <h3>Successfull</h3><?php                
-                header('Location:client.php');
+                header('Location:clients.php');
                 exit();
             }
         }
