@@ -95,7 +95,7 @@ if (isset($_GET['id']))
             </div>
 
             <div class="form-group mb-5">
-                <input type="submit" class="form-control btn btn-success" value="Sign Up">
+                <input type="submit" class="form-control btn btn-success" value="تعديــل">
             </div>
 
         </form>

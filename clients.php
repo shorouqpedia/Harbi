@@ -4,7 +4,13 @@ session_start();
 $title = "Haitham Harbi";
 $active = "clients";
 require_once 'partials/init.php';
-    if (isset($_GET['id']))
+if(isset($_POST['balance']))
+{
+  
+}
+if(isset($_GET['id']))
+{
+    if (isset($_GET['id']) && !isset($_GET['balance']))
     {
         $id = filter_var(intval($_GET['id']), FILTER_SANITIZE_NUMBER_INT);
         $query = $con->prepare("SELECT * FROM clients WHERE id=?");
@@ -18,18 +24,8 @@ require_once 'partials/init.php';
                 <div class="row">
                     <div class="card col-12">
                         <ul class="list-group list-group-flush">
-                          <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col-4 font-weight-bold">
-                                          ID
-                                        </div>
-                                        <div class="col-8">
-                                            <?php echo $id;?>
-                                        </div>
-                                    </div>
-                                </li>
                             <?php foreach ($client as $key=>$value) {
-                                if (in_array(strtolower($key),['id', 'image'])) {
+                                if (in_array(strtolower($key),['balance'])) {
                                     continue;
                                 }
                                 ?>
@@ -44,6 +40,16 @@ require_once 'partials/init.php';
                                     </div>
                                 </li>
                             <?php }?>
+                            <li class="list-group-item">
+                              <div class="row">
+                                <div class="col-4 font-weight-bold">
+                                  <p style="text-shadow: 0 0 20px purple;color:purple;margin-bottom: 0px;"><?php echo "الرصيـــد" ;?></p>
+                                </div>
+                                <div class="col-8">
+                                  <a href="<?php echo $_SERVER['PHP_SELF'] ?>?id=<?php echo $id?>&balance=1"><?php echo $client['balance'] ?> </a>
+                                </div>
+                              </div>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -63,7 +69,24 @@ require_once 'partials/init.php';
             exit();
         }
     }
+    else if (isset($_GET['id']) && isset($_GET['balance']))
+    {?>
+      <div class="container pt-3 reg-form">
+        <form class="col-12 col-sm-10 col-md-8 col-xl-6" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post"
+              id="balance" name="balance" enctype="multipart/form-data">
+          <pre style='color:red'>* اضف المبلغ بالسالب ليكون العميل مدين </pre>
+          <div class="form-group">
+            <label for="balance" class="control-label">أضف الى الرصيد</label>
+            <input required id="balance" name="balance" type="number" class="form-control" placeholder="0.00" value="0.00">
+          </div>
+          <div class="form-group mb-5">
+            <input type="submit" class="form-control btn btn-success" value="تأكيـــد">
+          </div>
 
+        </form>
+      </div>
+    <?PHP }
+}
     else
     {?>
       <div class="container d-flex align-items-end flex-column " >
@@ -101,11 +124,7 @@ require_once 'partials/init.php';
                     <?php
                     $clients = $query->fetchAll(PDO::FETCH_ASSOC);
                     ?>
-          
-                       
-
-                    <div class="col-12 py-5 d-flex align-items-center">
-                           
+                    <div class="col-12 py-5 d-flex align-items-center">   
                         <div class="card " style="width:69rem;">
                               <ul class="list-group ">
                               <?php foreach ($clients as $client) { ?>
