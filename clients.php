@@ -156,11 +156,11 @@ if(isset($_GET['id']))
                     <h2 class="h1 pb-5">No clients Registered</h2>
                 </div>
             </div>
+
             <?php  
         }
 
     }
     
-
 ob_end_flush();
 ?>
