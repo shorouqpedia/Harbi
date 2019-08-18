@@ -34,14 +34,14 @@ if ($query->rowCount() > 0) { ?>
 					      	<td><?php echo $product['price'];?></td>
 					      	<td><?php echo $product['store_type'];?></td>
 					    </tr>
-					<?php}?>
+					<?php } ?>
 			  	</tbody>
 			</table>
 		</div>
 	</div>
 <?php
-}}
-else 
-	header('localhost/index.php');
+} else {
+    header('localhost/index.php');
+}
 ob_end_flush();
 ?>
