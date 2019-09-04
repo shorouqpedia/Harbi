@@ -46,7 +46,7 @@ if(isset($_GET['id']))
                                   <p style="text-shadow: 0 0 20px purple;color:purple;margin-bottom: 0px;"><?php echo "الرصيـــد" ;?></p>
                                 </div>
                                 <div class="col-8">
-                                  <a href="<?php echo $_SERVER['PHP_SELF'] ?>?id=<?php echo $id?>&balance=1"><?php echo $client['balance'] ?> </a>
+                                  <a href="balance.php?id=<?php echo $id; ?>"/><?php echo $client['balance']; ?> </a>
                                 </div>
                               </div>
                             </li>
@@ -72,12 +72,15 @@ if(isset($_GET['id']))
     else if (isset($_GET['id']) && isset($_GET['balance']))
     {?>
       <div class="container pt-3 reg-form">
-        <form class="col-12 col-sm-10 col-md-8 col-xl-6" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post"
-              id="balance" name="balance" enctype="multipart/form-data">
+        <form class="col-12 col-sm-10 col-md-8 col-xl-6" action="balance.php" method="post" enctype="multipart/form-data">
           <pre style='color:red'>* اضف المبلغ بالسالب ليكون العميل مدين </pre>
           <div class="form-group">
             <label for="balance" class="control-label">أضف الى الرصيد</label>
             <input required id="balance" name="balance" type="number" class="form-control" placeholder="0.00" value="0.00">
+          </div>
+          <div class="form-group">
+            <label for="comment" class="control-label">أضف الى الرصيد</label>
+              <textarea id="comment" name="comment" rows="3" style="resize: vertical;" class="form-control" placeholder="ملاحظات..."></textarea>
           </div>
           <div class="form-group mb-5">
             <input type="submit" class="form-control btn btn-success" value="تأكيـــد">
