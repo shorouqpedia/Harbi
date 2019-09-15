@@ -36,6 +36,7 @@ CREATE TABLE `clients` (
   `chassis_no` varchar(111) NOT NULL,
   `license_name` varchar(111) NOT NULL,
   `KM_counter` int(100) NOT NULL,
+  `balance` float NOT NULL DEFAULT 0.00,
   `signup_date` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ;
 
@@ -214,6 +215,11 @@ INSERT INTO `store` (`code`, `name`, `store_type`, `quantity`, `price`, `details
 -- Indexes for table `items`
 --
 ALTER TABLE `items`
+  ADD PRIMARY KEY (`id`);
+--
+-- Indexes for table `items`
+--
+ALTER TABLE `clients`
   ADD PRIMARY KEY (`id`);
 
 --
