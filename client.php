@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         {   
 
             $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
-            $phone = filter_var(intval($_POST['phone']), FILTER_SANITIZE_NUMBER_INT);        
+            $phone = filter_var($_POST['phone'], FILTER_SANITIZE_STRING);        
             $license_no = filter_var($_POST['license_no'], FILTER_SANITIZE_STRING);
             $brand = filter_var($_POST['brand'], FILTER_SANITIZE_STRING);
             $year = filter_var($_POST['year'], FILTER_SANITIZE_NUMBER_INT);

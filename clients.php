@@ -21,11 +21,13 @@ if(isset($_GET['id']))
             $client = $query->fetchAll(PDO::FETCH_ASSOC)[0];
             ?>
             <div class="container pb-5">
+              <?php $u=$id+1;?>
+              <a href="clients.php?id=<?php echo $u;?>">Next</a>
                 <div class="row">
                     <div class="card col-12">
                         <ul class="list-group list-group-flush">
                             <?php foreach ($client as $key=>$value) {
-                                if (in_array(strtolower($key),['balance'])) {
+                                if (in_array(strtolower($key),['balance','note'])) {
                                     continue;
                                 }
                                 ?>
@@ -43,22 +45,53 @@ if(isset($_GET['id']))
                             <li class="list-group-item">
                               <div class="row">
                                 <div class="col-4 font-weight-bold">
-                                  <p style="text-shadow: 0 0 20px purple;color:purple;margin-bottom: 0px;"><?php echo "الرصيـــد" ;?></p>
+                                  <p style="text-shadow: 0 0 20px purple;color:purple;"><?php echo "الرصيـــد" ;?></p>
                                 </div>
                                 <div class="col-8">
-                                  <a href="balance.php?id=<?php echo $id; ?>"/><?php echo $client['balance']; ?> </a>
+                                  <a href="balance.php?id=<?php echo $id; ?>"/><?php echo 
+                                  $client['balance']; ?> </a>
                                 </div>
                               </div>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <a class="form-control btn btn-success" style="margin-top:10px;" href="edit.php?id=<?php echo $id; ?>">تعديـل البيـانـات</a>
-                
+                <center><a class=" btn btn-success" style="align-items: center; margin-top:5px; width: 200px" href="edit.php?id=<?php echo $id; ?>">تعديـل البيـانـات</a>
+                </center>
                 <form action="maintain.php" method="GET">
-                <input type="text" hidden="TRUE" name="cid" value="<?php echo $id; ?>">
-
-                <button type="submit" class="form-control btn btn-success" style="margin-top:10px;height: 38px;">سجـل الصيــانات</button>
+                  <input type="text" hidden="TRUE" name="cid" value="<?php echo $id; ?>">
+                  <center>
+                    <button type="submit" class=" btn btn-success" style="width: 200px;margin-top:5px;">سجـل الصيــانات</button>
+                  </center>
+                </form>
+                <?php
+                if ( $client['note']=='NULL'||!isset($client['note'])) 
+                {}else{
+                ?>
+                  <div style=" margin-top:10px;" class="table-responsive-xl">
+                    <table style=" text-align:center" dir="rtl" class="table table-hover ">
+                      <thead  class="thead-dark">
+                        <tr>
+                          <th scope="col" > ملاحظات </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        
+                          <?php
+                          $x=explode(';', $client['note'] );
+                          for ($i=0;$i<count($x);$i++)
+                          {
+                          ?>
+                          <tr>
+                            <th scope="row"><?php echo '* '.$x[$i];?></th>
+                          </tr>
+                        <?php } ?>
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                <?php } ?>
+                <center> <a href=""> أضف ملاحظة </a> </center>
             </div>
 
         <?php 
@@ -152,6 +185,8 @@ if(isset($_GET['id']))
                     </div>
                 </div>
             </div>
+
+
         <?php }
         else { ?>
             <div class="container py-5 mb-5 text-center">
