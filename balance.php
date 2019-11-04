@@ -4,6 +4,10 @@ session_start();
 $title = "Haitham Harbi";
 $active = "clients";
 require_once 'partials/init.php';
+$client_id = $_GET['id'];
+$c_balance=0;
+
+
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $id = $_POST['client_id'];
     $balance = floatval($_POST['balance']);
@@ -14,11 +18,18 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         $balance,
         $comment
     ));
-    $query = $con->prepare("UPDATE clients SET balance = balance + ? WHERE id=?");
-    $query->execute(array($balance, $id));
-    header("location:" . $_SERVER['PHP_SELF'] . "?id=" . $id);
+        header("location:" . $_SERVER['PHP_SELF'] . "?id=" . $id);
 }
-$client_id = $_GET['id'];
+$query = $con->prepare("SELECT * FROM client_balance WHERE client_id=?");
+$query->execute(array($client_id));
+$logs = $query->fetchAll(PDO::FETCH_ASSOC);
+foreach ($logs as $log) {
+    $val = floatval($log['balance_change']);
+    $c_balance=$c_balance+$val;
+}
+$query = $con->prepare("UPDATE clients SET balance = ? WHERE id=?");
+$query->execute(array($c_balance, $client_id));
+
 if ($client_id) {
 ?>
     <div class="container pt-3">
