@@ -65,8 +65,15 @@ if(isset($_GET['id']))
                   </center>
                 </form>
                 <?php
-                if ( $client['note']=='NULL'||!isset($client['note'])) 
-                {}else{
+                $query = $con->prepare("SELECT * FROM notes WHERE cid=?");
+                $query->execute(array($id));
+                if ($query->rowCount() > 0) 
+                {
+                $notes = $query->fetchAll(PDO::FETCH_ASSOC)[0];
+                var_dump($notes);
+                foreach ($notes as $note) {
+                  echo $note;
+                }
                 ?>
                   <div style=" margin-top:10px;" class="table-responsive-xl">
                     <table style=" text-align:center" dir="rtl" class="table table-hover ">
@@ -76,22 +83,18 @@ if(isset($_GET['id']))
                         </tr>
                       </thead>
                       <tbody>
-                        
-                          <?php
-                          $x=explode(';', $client['note'] );
-                          for ($i=0;$i<count($x);$i++)
-                          {
+                        <?php 
+                        foreach ($notes as $note) {
                           ?>
                           <tr>
-                            <th scope="row"><?php echo '* '.$x[$i];?></th>
+                            <th scope="row"><?php echo '* '.$note['note'];?> </th>
                           </tr>
-                        <?php } ?>
-                        
+                        <?php }} ?>
                       </tbody>
                     </table>
                   </div>
-                <?php } ?>
-                <center> <a href=""> أضف ملاحظة </a> </center>
+                <?php }?>
+                <center> <a href="addnote.php?id=<?php echo $id?>"> أضف ملاحظة </a> </center>
             </div>
 
         <?php 
@@ -113,7 +116,8 @@ if(isset($_GET['id']))
           </div>
           <div class="form-group">
             <label for="comment" class="control-label">أضف الى الرصيد</label>
-              <textarea id="comment" name="comment" rows="3" style="resize: vertical;" class="form-control" placeholder="ملاحظات..."></textarea>
+              <textarea id="comment" name="comment" rows="3
+              " style="resize: vertical;" class="form-control" placeholder="ملاحظات..."></textarea>
           </div>
           <div class="form-group mb-5">
             <input type="submit" class="form-control btn btn-success" value="تأكيـــد">
@@ -122,7 +126,6 @@ if(isset($_GET['id']))
         </form>
       </div>
     <?PHP }
-}
     else
     {?>
       <div class="container d-flex align-items-end flex-column " >
