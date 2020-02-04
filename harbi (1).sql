@@ -35,7 +35,7 @@ USE `harbi`;
 
 DROP TABLE IF EXISTS `clients`;
 CREATE TABLE IF NOT EXISTS `clients` (
-  `id` int(14) NOT NULL AUTO_INCREMENT,
+  `id` int(14) AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(255) NOT NULL,
   `phone_no` varchar(255) NOT NULL,
   `license_no` varchar(255) NOT NULL,
@@ -61,7 +61,7 @@ TRUNCATE TABLE `clients`;
 -- Dumping data for table `clients`
 --
 
-INSERT DELAYED IGNORE INTO `clients` (`id`, `name`, `phone_no`, `license_no`, `brand`, `year`, `chassis_no`, `license_name`, `KM_counter`, `balance`, `signup_date`) VALUES
+INSERT INTO `clients` (`id`, `name`, `phone_no`, `license_no`, `brand`, `year`, `chassis_no`, `license_name`, `KM_counter`, `balance`, `signup_date`) VALUES
 (1, 'علاء', '', '', '', 0000, '', '', 0, -500, '0000-00-00 00:00:00.000000'),
 (1000, 'سمر محمود', '01009642542', 'س ط ب 3318', 'BENELLI Caffenero Sport', 2017, '729939', 'هيثم محمد توفيق', 9000, 0, '2019-08-09 15:17:00.000000'),
 (1001, 'محمد فايز عبدالقادر', '01551157709', 'س ع ب 3134', 'SYM JET 14', 2018, '7813', 'احمد عيسى', 17650, 0, '2019-07-06 16:13:56.544874'),
@@ -187,7 +187,7 @@ TRUNCATE TABLE `client_balance`;
 -- Dumping data for table `client_balance`
 --
 
-INSERT DELAYED IGNORE INTO `client_balance` (`bid`, `client_id`, `balance_change`, `date`, `comment`) VALUES
+INSERT INTO `client_balance` (`bid`, `client_id`, `balance_change`, `date`, `comment`) VALUES
 (13, 1, -60, '2019-11-01 15:57:00', 'بكر سحب'),
 (14, 1, -100, '2019-11-01 15:57:09', 'سير فيدل'),
 (15, 1, -55, '2019-11-01 15:57:31', 'كوعة كربراتير'),
@@ -259,7 +259,7 @@ TRUNCATE TABLE `items`;
 -- Dumping data for table `items`
 --
 
-INSERT DELAYED IGNORE INTO `items` (`id`, `name`, `price`, `quantity`) VALUES
+INSERT INTO `items` (`id`, `name`, `price`, `quantity`) VALUES
 (1000, 'Castrol Oil', '120', 2);
 
 -- --------------------------------------------------------
@@ -293,7 +293,7 @@ TRUNCATE TABLE `maintenance_history`;
 -- Dumping data for table `maintenance_history`
 --
 
-INSERT DELAYED IGNORE INTO `maintenance_history` (`id`, `cid`, `date`, `name`, `details`) VALUES
+INSERT INTO `maintenance_history` (`id`, `cid`, `date`, `name`, `details`) VALUES
 (1, 1006, '2019-07-20 18:53:12', '1300', 'زيت وولف 10/40'),
 (2, 1005, '2019-07-17 18:00:00', '10300', 'تغير زيت جير بوكس,تغير تيل خلفي,CVT,تغير بكر سحب,تغير تيل امامي,تغير رمان بلي'),
 (3, 1007, '2019-07-20 20:01:44', '32000', 'زيت وولف 10/40'),
@@ -458,7 +458,7 @@ TRUNCATE TABLE `notes`;
 -- Dumping data for table `notes`
 --
 
-INSERT DELAYED IGNORE INTO `notes` (`cid`, `note_id`, `note`, `time`) VALUES
+INSERT INTO `notes` (`cid`, `note_id`, `note`, `time`) VALUES
 (1003, 1, 'aa', '2019-12-18 19:18:39'),
 (1003, 2, 'xsdfdsf', '2019-12-18 19:22:15'),
 (1003, 3, 'dff', '2019-12-18 19:22:42');
@@ -495,7 +495,7 @@ TRUNCATE TABLE `store`;
 -- Dumping data for table `store`
 --
 
-INSERT DELAYED IGNORE INTO `store` (`code`, `name`, `store_type`, `quantity`, `price`, `details`) VALUES
+INSERT INTO `store` (`code`, `name`, `store_type`, `quantity`, `price`, `details`) VALUES
 (100, 'تيل أمامي', 'BENELLI', 14, 0, ''),
 (101, 'تيل خلفي', '', 21, 0, ''),
 (102, 'بكر سحب أصلي', '', 4, 100, ''),

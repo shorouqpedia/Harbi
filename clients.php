@@ -69,11 +69,7 @@ if(isset($_GET['id']))
                 $query->execute(array($id));
                 if ($query->rowCount() > 0) 
                 {
-                $notes = $query->fetchAll(PDO::FETCH_ASSOC)[0];
-                var_dump($notes);
-                foreach ($notes as $note) {
-                  echo $note;
-                }
+                $notes = $query->fetchAll(PDO::FETCH_ASSOC);
                 ?>
                   <div style=" margin-top:10px;" class="table-responsive-xl">
                     <table style=" text-align:center" dir="rtl" class="table table-hover ">
