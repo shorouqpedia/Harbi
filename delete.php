@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 else
 {
 ?>
-<form method="post" onsubmit="alert('Deleted');" action="try.php">
+<form method="post" onsubmit="alert('Deleted');" action="delete.php">
     <label>
         Are you sure you want to delete?
     </label>
