@@ -65,27 +65,32 @@ if(isset($_GET['id']))
                   </center>
                 </form>
                 <?php
-                $query = $con->prepare("SELECT * FROM notes WHERE cid=?");
+                $query = $con->prepare("SELECT * FROM `notes` WHERE `cid`=?");
                 $query->execute(array($id));
                 if ($query->rowCount() > 0) 
                 {
                 $notes = $query->fetchAll(PDO::FETCH_ASSOC);
                 ?>
                   <div style=" margin-top:10px;" class="table-responsive-xl">
-                    <table style=" text-align:center" dir="rtl" class="table table-hover ">
+                    <table style=" text-align:center" class="table table-hover ">
                       <thead  class="thead-dark">
                         <tr>
-                          <th scope="col" > ملاحظات </th>
+                          <th scope="col" colspan="2"> ملاحظات </th>
                         </tr>
                       </thead>
                       <tbody>
-                        <?php 
-                        foreach ($notes as $note) {
-                          ?>
-                          <tr>
-                            <th scope="row"><?php echo '* '.$note['note'];?> </th>
-                          </tr>
-                        <?php }} ?>
+                      <?php foreach ($notes as $note) {
+                        ?>
+                        <tr>
+                          <th style="width: 80%;">
+                            <?php echo $note['note'];?>
+                          </th>
+                          <th>
+                            <a href="try.php?note_id=<?php echo $note['note_id']?>">Delete</a>
+                          </th>
+                        </tr>
+                      <?php
+                      }}?>
                       </tbody>
                     </table>
                   </div>
