@@ -5,7 +5,8 @@ require_once 'partials/init.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $note_id=$_GET['note_id'];
     echo $note_id;
-    $query = $con->prepare('DELETE FROM notes WHERE note_id = $note_id');
+    $query = $con->prepare('DELETE FROM notes WHERE note_id=?');
+    $query->execute(array($note_id));
     header('Location:clients.php');
     ?>
     DONE
