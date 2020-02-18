@@ -22,8 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $note
         ));
 
-        header("location:" . $_SERVER['PHP_SELF'] . "?id=" . $id);
-       
+	$redirect_url = str_replace('addnote', 'clients', $_SERVER['PHP_SELF']) . "?id=" . $id; 
+        header("location:" . $redirect_url);        
     }
 }
 else { ?>
