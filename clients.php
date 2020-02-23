@@ -86,7 +86,7 @@ if(isset($_GET['id']))
                             <?php echo $note['note'];?>
                           </th>
                           <th>
-                            <a href="try.php?note_id=<?php echo $note['note_id']?>">Delete</a>
+                            <a href="delete.php?note_id=<?php echo $note['note_id']?>">Delete</a>
                           </th>
                         </tr>
                       <?php
